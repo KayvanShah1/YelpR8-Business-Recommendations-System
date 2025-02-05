@@ -19,22 +19,20 @@ YelpR8 is a hybrid recommendation system designed to predict user ratings for bu
   - `pandas`  
   - `scikit-learn`
 
+> The environment on Google Colab may differ slightly from a local setup, but there is no need to worry—it will still work as expected.
+
 ### Installation Steps
 1. **Clone the Repository:**
    ```sh
-   git clone <repository-url>
-   cd YelpR8
+   git clone git@github.com:KayvanShah1/YelpR8-Business-Recommendations-System.git
+   cd YelpR8-Business-Recommendations-System
    ```
 2. **Install Dependencies:**
    Create a virtual environment (optional) and install the required libraries:
    ```sh
    pip install -r requirements.txt
    ```
-3. **Set Up Spark:**
-   Ensure that Spark is correctly installed and configured on your system. You should be able to run:
-   ```sh
-   /opt/spark/spark-3.1.2-bin-hadoop3.2/bin/spark-submit --version
-   ```
+> I recommend using Google Colab for this project, as it provides a convenient and hassle-free environment for running the code without requiring extensive local setup.
 
 ## Approach and Intuition
 
