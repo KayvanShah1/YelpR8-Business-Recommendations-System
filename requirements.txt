@@ -3,3 +3,8 @@ flake8
 pyspark
 requests
 rich
+ipython-autotime
+xgboost
+numpy
+pandas
+scikit-learn
