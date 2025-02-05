@@ -1,48 +1,114 @@
-# DSCI553 - Foundations & Applications of Data Mining - Spring 2024 - USC
-Welcome to the comprehensive repository for course _DSCI 510 - Foundations of Data Management_ taught by `Professor Wei-Min When` at USC during the __Spring 2024__ semester. This centralized hub contains all coursework materials, including assignments and project solutions, organized into folders representing distinct modules covered in the course.
+# YelpR8: Business Recommendations System
 
-> [!TIP]
-> Before exploring the materials, take a moment to review the license and disclaimer for responsible utilization. The repository covers various topics, providing valuable insights and hands-on experience in Data Mining.
+## Overview
+YelpR8 is a hybrid recommendation system designed to predict user ratings for businesses on Yelp. This project leverages both model-based and item-based collaborative filtering approaches. The model-based component uses an XGBoost regressor with carefully engineered features extracted from Yelp data, while the item-based component computes Pearson similarities between businesses. Finally, a hybrid prediction is obtained by weighting the outputs of both methods. This integrated approach has allowed the system to achieve a competitive RMSE, placing it at rank 12 in the competition.
 
-## Course Details:
-- **Course Name:** DSCI 553 - Foundations & Applications of Data Mining
-- **Instructor:** Prof. Wei-Min Shen
-- **Semester:** Spring 2024
+## Setup & Installation
 
-Feel free to explore the assignments, projects, and solutions provided as learning aids. Whether you're a beginner or an experienced practitioner, this repository aims to be your companion in mastering the intersection of foundational data mining fundamentals within Data Science & Engineering. Happy learning!
+### Environment Requirements
+- **Python Version:** 3.6 (or later, ensuring compatibility with Spark 3.1.2)
+- **Scala Version:** 2.12
+- **JDK:** 1.8
+- **Apache Spark:** 3.1.2 (using Spark RDDs – DataFrame and DataSet are not allowed)
+- **External Libraries:**  
+  - `xgboost`  
+  - `numpy`  
+  - `pandas`  
+  - `scikit-learn`
 
-> [!CAUTION]
-> Please note that this repository serves as a reference guide and should be utilized as a tool for learning and comprehension. It's paramount to refrain from engaging in any activities associated with plagiarism. Embrace the wealth of knowledge herein to enhance your understanding and augment your skill set in Data Mining.
+### Installation Steps
+1. **Clone the Repository:**
+   ```sh
+   git clone <repository-url>
+   cd YelpR8
+   ```
+2. **Install Dependencies:**
+   Create a virtual environment (optional) and install the required libraries:
+   ```sh
+   pip install -r requirements.txt
+   ```
+3. **Set Up Spark:**
+   Ensure that Spark is correctly installed and configured on your system. You should be able to run:
+   ```sh
+   /opt/spark/spark-3.1.2-bin-hadoop3.2/bin/spark-submit --version
+   ```
 
-## Table of contents
-| Assignment | Topic Covered                 | Grade |
-|------------|-------------------------------|-------|
-| [HW 1](/assignment-1) | Data Exploration of `Yelp Reviews Dataset` with `Spark RDD` | 7/7 |
-| [HW 2](/assignment-2) | Implement `SON Algorithm` to find `Frequent Itemsets` using `Spark` and exploration of `Ta Feng Dataset` | 7/7 |
-| [HW 3](/assignment-3) | Build Hybrid Recommendation systems integrating `Item-based Collaborative Filtering` and `Model-based` approaches using `XGBRegressor` | 7/7 |
-| [HW 4](/assignment-4) | Building `Graphs` and `Community Detection` based on `Graphframes` and `Girvan-Newman algorithm` | 7/7 |
-| [HW 5](/assignment-5) | Data Streaming Analysis - `Bloom Filter`, `Flajolet-Martin`, and `Reservoir Sampling` | 7/7 |
-| [HW 6](/assignment-6) | Clustering using `Bradley-Fayyad-Reina (BFR) algorithm` on synthetic dataset | 7/7 |
-| --- | --- |
-| [Competition](/competition) | Recommendation System on Yelp Reviews Dataset | 8/8 |
-| --- | --- |
-| [Quizzes](/quizzes) | Consists of PDF documents with question bank for quizzes | - |
+## Approach and Intuition
+
+The main objective of YelpR8 is to improve recommendation accuracy by combining two complementary approaches:
+
+1. **Model-Based Recommendation:**
+   - **Feature Engineering:**  
+     Data from multiple sources (user profiles, business details, reviews, tips, and photos) is aggregated. For each user-business pair, we extract features like average star ratings, review counts, user activity metrics, and business characteristics.
+   - **XGBoost Regression:**  
+     After feature extraction, the system normalizes the data using a min–max scaler. The XGBoost regressor is trained with hyperparameters optimized through local GridSearch. This model is able to capture non-linear relationships in the data, resulting in robust rating predictions.
+
+2. **Item-Based Collaborative Filtering:**
+   - **Pearson Similarity:**  
+     We compute the Pearson similarity between businesses by comparing the ratings provided by common users. For pairs with few co-ratings, a fallback similarity based on average ratings difference is used.
+   - **Neighbour Selection:**  
+     For each target prediction, ratings from the top 15 most similar businesses are aggregated (weighted by similarity) to predict the rating.
+  
+3. **Hybrid Approach:**
+   - **Fusion of Predictions:**  
+     The final prediction is a weighted combination of the model-based and item-based predictions. A carefully chosen weight (e.g., FACTOR = 0.05222) helps balance the strengths of both methods, leading to improved accuracy overall.
+
+This dual approach leverages the robustness of model-based predictions with the personalized similarity insights from collaborative filtering, resulting in improved RMSE performance.
+
+[!TIP]
+This repository is designed to provide guidance and insights into building a robust hybrid recommendation system using advanced data mining techniques. Use this project as a learning tool to deepen your understanding and enhance your skills. Always ensure that your work maintains academic integrity and originality—avoid plagiarism and give proper credit where it's due.
+
+## Results
+
+Below is a summary of the system's performance metrics on the validation and test datasets:
+
+| Metric                          | Value (Validation) | Value (Test)    |
+|---------------------------------|--------------------|-----------------|
+| **RMSE**                      | 0.9773             | 0.9760          |
+| **Error Distribution (Count)**|                    |                 |
+| &nbsp;&nbsp;>= 0 and < 1        | 102,162            | (Similar trend) |
+| &nbsp;&nbsp;>= 1 and < 2        | 32,993             | (Similar trend) |
+| &nbsp;&nbsp;>= 2 and < 3        | 6,116              | (Similar trend) |
+| &nbsp;&nbsp;>= 3 and < 4        | 773                | (Similar trend) |
+| &nbsp;&nbsp;>= 4              | 0                  | 0               |
+| **Data Processing Time**        | -                  | ~183.6 seconds  |
+| **Model Training Time**         | -                  | ~425.0 seconds  |
+| **Total Execution Time**        | -                  | ~622.1 seconds  |
+
+*Note: The error distribution for the test set follows a similar pattern to the validation set. These metrics showcase that the system not only meets but slightly beats the TA’s RMSE threshold of 0.9800.*
 
 > [!NOTE]
-> Overall Grade: `A-`
+> Overall Rank: `12`
 
-## References
-1. [USC DSCI 553 Fall 2023 - rutujabhandigani/DSCI553-Data-Mining](https://github.com/rutujabhandigani/DSCI553-Data-Mining)
-2. [USC DSCI 553 Fall 2022 - CyL97/DSCI-553](https://github.com/CyL97/DSCI-553)
-3. [USC DSCI 553 Fall 2021 - Shayne-Yang/DSCI_553](https://github.com/Shayne-Yang/DSCI_553)
-4. [USC DSCI 553 Spring 2021 - pohann/DSCI553](https://github.com/pohann/DSCI553)
+## Usage
+### Command-Line Execution
+The system is executed via Spark using the following command:
+```sh
+/opt/spark/spark-3.1.2-bin-hadoop3.2/bin/spark-submit competition.py <folder_path> <test_file_name> <output_file_name>
+```
+- **folder_path:** Directory containing the Yelp datasets (e.g., `yelp_train.csv`, `review_train.json`, `user.json`, `business.json`, etc.)
+- **test_file_name:** Path to the validation/test CSV file (e.g., `yelp_val.csv`)
+- **output_file_name:** Desired output CSV file path for the predictions
 
+### Example
+```sh
+spark-submit competition.py ./YelpData ./YelpData/yelp_val.csv ./Output/predictions.csv
+```
+
+## Future Work
+
+- **Model Improvements:**  
+  Experiment with additional ensemble methods or deep learning approaches to further improve prediction accuracy.
+- **Real-Time Recommendations:**  
+  Extend the system to support near real-time predictions using streaming data.
+- **Additional Features:**  
+  Incorporate more sophisticated feature engineering (e.g., text mining from reviews) and user personalization.
 
 ## Authors
 1. [Kayvan Shah](https://github.com/KayvanShah1) | `MS in Applied Data Science` | `University of Southern California`
 
 #### LICENSE
-This repository is licensed under the `BSD 5-Clause` License. See the [LICENSE](LICENSE) file for details.
+This repository is licensed under the `MIT` License. See the [LICENSE](LICENSE) file for details.
 
 #### Disclaimer
 
