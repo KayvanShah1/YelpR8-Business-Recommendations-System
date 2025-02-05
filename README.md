@@ -1,6 +1,6 @@
 # YelpR8: Business Recommendations System
 
-![Yelp Review Project Banner](./competition/docs/banner.PNG)
+![Yelp Review Project Banner](./competition/docs/banner.png)
 
 
 ## Overview
