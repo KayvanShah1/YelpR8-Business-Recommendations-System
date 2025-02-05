@@ -1,5 +1,8 @@
 # YelpR8: Business Recommendations System
 
+![Yelp Review Project Banner](./competition/docs/banner.PNG)
+
+
 ## Overview
 YelpR8 is a hybrid recommendation system designed to predict user ratings for businesses on Yelp. This project leverages both model-based and item-based collaborative filtering approaches. The model-based component uses an XGBoost regressor with carefully engineered features extracted from Yelp data, while the item-based component computes Pearson similarities between businesses. Finally, a hybrid prediction is obtained by weighting the outputs of both methods. This integrated approach has allowed the system to achieve a competitive RMSE, placing it at rank 12 in the competition.
 
