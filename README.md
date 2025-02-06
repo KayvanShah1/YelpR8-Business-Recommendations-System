@@ -85,7 +85,7 @@ Below is a summary of the system's performance metrics on the validation and tes
 ### Command-Line Execution
 The system is executed via Spark using the following command:
 ```sh
-/opt/spark/spark-3.1.2-bin-hadoop3.2/bin/spark-submit competition.py <folder_path> <test_file_name> <output_file_name>
+/opt/spark/spark-3.1.2-bin-hadoop3.2/bin/spark-submit file.py <folder_path> <test_file_name> <output_file_name>
 ```
 - **folder_path:** Directory containing the Yelp datasets (e.g., `yelp_train.csv`, `review_train.json`, `user.json`, `business.json`, etc.)
 - **test_file_name:** Path to the validation/test CSV file (e.g., `yelp_val.csv`)
@@ -93,7 +93,7 @@ The system is executed via Spark using the following command:
 
 ### Example
 ```sh
-spark-submit competition.py ./YelpData ./YelpData/yelp_val.csv ./Output/predictions.csv
+spark-submit final.py ./YelpData ./YelpData/yelp_val.csv ./Output/predictions.csv
 ```
 
 ## Future Work
