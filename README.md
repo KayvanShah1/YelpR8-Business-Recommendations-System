@@ -65,21 +65,21 @@ Below is a summary of the system's performance metrics on the validation and tes
 
 | Metric                          | Value (Validation) | Value (Test)    |
 |---------------------------------|--------------------|-----------------|
-| **RMSE**                      | 0.9773             | 0.9760          |
-| **Error Distribution (Count)**|                    |                 |
-| &nbsp;&nbsp;>= 0 and < 1        | 102,162            | (Similar trend) |
-| &nbsp;&nbsp;>= 1 and < 2        | 32,993             | (Similar trend) |
-| &nbsp;&nbsp;>= 2 and < 3        | 6,116              | (Similar trend) |
-| &nbsp;&nbsp;>= 3 and < 4        | 773                | (Similar trend) |
-| &nbsp;&nbsp;>= 4              | 0                  | 0               |
-| **Data Processing Time**        | -                  | ~183.6 seconds  |
-| **Model Training Time**         | -                  | ~425.0 seconds  |
-| **Total Execution Time**        | -                  | ~622.1 seconds  |
+| **RMSE**                        | 0.9773             | 0.9760          |
+| **Error Distribution (Count)**  |                    |                 |
+| &nbsp;&nbsp;>= 0 and < 1        | 102,076            | 102,162         |
+| &nbsp;&nbsp;>= 1 and < 2        | 33,039             | 32,993          |
+| &nbsp;&nbsp;>= 2 and < 3        | 6,156              | 6,116           |
+| &nbsp;&nbsp;>= 3 and < 4        | 772                | 773             |
+| &nbsp;&nbsp;>= 4                | 1                  | 0               |
+| **Data Processing Time**        | ~179.5 seconds     | ~183.6 seconds  |
+| **Model Training Time**         | ~70.4 seconds      | ~425.0 seconds  |
+| **Total Execution Time**        | ~251.5 seconds     | ~622.1 seconds  |
 
 *Note: The error distribution for the test set follows a similar pattern to the validation set. These metrics showcase that the system not only meets but slightly beats the TA’s RMSE threshold of 0.9800.*
 
 > [!NOTE]
-> Overall Rank: `9`
+> Overall Rank: `12`
 
 ## Usage
 ### Command-Line Execution
