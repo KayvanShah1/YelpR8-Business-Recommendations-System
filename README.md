@@ -56,8 +56,8 @@ The main objective of YelpR8 is to improve recommendation accuracy by combining 
 
 This dual approach leverages the robustness of model-based predictions with the personalized similarity insights from collaborative filtering, resulting in improved RMSE performance.
 
-[!TIP]
-This repository is designed to provide guidance and insights into building a robust hybrid recommendation system using advanced data mining techniques. Use this project as a learning tool to deepen your understanding and enhance your skills. Always ensure that your work maintains academic integrity and originality—avoid plagiarism and give proper credit where it's due.
+> [!TIP]
+> This repository is designed to provide guidance and insights into building a robust hybrid recommendation system using advanced data mining techniques. Use this project as a learning tool to deepen your understanding and enhance your skills. Always ensure that your work maintains academic integrity and originality—avoid plagiarism and give proper credit where it's due.
 
 ## Results
 
